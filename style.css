@@ -89,10 +89,7 @@ h1 {
   z-index: -1;
 }
 .open-card-anim-done {
-  width: calc(60% * 1.8);
-  height: calc(33% * 2.5);
-  max-width: calc(600px * 1.8);
-  max-height: calc(400px * 2.5);
+  
 }
 .open-card-anim::before {
   animation-name: go;
