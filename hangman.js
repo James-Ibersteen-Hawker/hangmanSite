@@ -30,7 +30,7 @@ function start(mode) {
         .classList.add("open-card-anim-done");
       document.getElementsByTagName("STYLE")[0].append(`
         .openedCard::after, .openedCard::before {
-        transform: scaleX(1) scaleY(1);
+        transform: scaleX(1) scaleY(1) translateX(-22.2%);
         animation: none;
         width: ${document.querySelector(".opening-card").offsetWidth * 1.8}px;
         height: ${
