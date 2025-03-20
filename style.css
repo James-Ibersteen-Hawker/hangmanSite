@@ -1,0 +1,215 @@
+html {
+  width: 100%;
+  height: 100%;
+}
+body {
+  height: 100%;
+  width: 100%;
+  --green: rgb(230, 250, 224);
+  --white: rgb(240, 250, 241);
+  --darkGreen: rgb(0, 104, 0);
+  background: linear-gradient(
+    33.6deg,
+    var(--green) 0% 9%,
+    var(--white) 11% 19%,
+    var(--green) 21% 29%,
+    var(--white) 31% 39%,
+    var(--green) 41% 49%,
+    var(--white) 51% 59%,
+    var(--green) 61% 69%,
+    var(--white) 71% 79%,
+    var(--green) 81% 89%,
+    var(--white) 91% 100%
+  );
+  background-repeat: repeat;
+  position: relative;
+  background-size: 200px 200px;
+}
+@font-face {
+  font-family: Sunday;
+  src: url(sunday.otf);
+}
+* {
+  padding: 0;
+  margin: 0;
+}
+h1 {
+  font-family: "Sunday", sans-serif;
+  color: transparent;
+  -webkit-text-stroke: 1px black;
+  background: linear-gradient(to bottom, rgb(0, 179, 0), var(--darkGreen));
+  background-clip: text;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90px;
+}
+.opening-card {
+  height: 33%;
+  max-height: 400px;
+  width: 60%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 10px;
+  position: relative;
+}
+.opening-card::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  bottom: 50%;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.678);
+  border-top: 3px solid var(--darkGreen);
+  border-right: 3px solid var(--darkGreen);
+  border-left: 3px solid var(--darkGreen);
+  backdrop-filter: blur(5px);
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  z-index: -1;
+}
+.opening-card::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  top: 50%;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-bottom: 3px solid var(--darkGreen);
+  border-right: 3px solid var(--darkGreen);
+  border-left: 3px solid var(--darkGreen);
+  backdrop-filter: blur(5px);
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  z-index: -1;
+}
+.open-card-anim-done {
+  width: calc(60% * 1.8);
+  height: calc(33% * 2.5);
+  max-width: calc(600px * 1.8);
+  max-height: calc(400px * 2.5);
+}
+.open-card-anim::before {
+  animation-name: go;
+  animation-duration: 5s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+.open-card-anim::after {
+  animation-name: go2;
+  animation-duration: 5s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+.button {
+  width: 60%;
+  min-width: 100px;
+  border: 4px outset var(--darkGreen);
+  background: transparent;
+  border-radius: 10px;
+  height: 65px;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10px;
+  overflow: clip;
+  position: relative;
+  font-family: "Montserrat", sans-serif;
+  font-size: 40px;
+  box-shadow: 0px 0px 3px black inset;
+  color: black;
+  transition-duration: 0.5s;
+  p {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    transition-duration: 0.5s;
+  }
+}
+.slashdiv {
+  height: 100%;
+  width: 80%;
+  left: -100%;
+  background: rgba(3, 155, 3, 0.699);
+  position: absolute;
+  z-index: 0;
+  transform: skew(-30deg);
+  transition: 1s;
+}
+.button:hover {
+  background: rgb(216, 216, 216);
+  width: 65%;
+  .slashdiv {
+    left: 110%;
+  }
+  p {
+    font-family: "Fleur De Leah", cursive;
+    color: rgb(88, 25, 0);
+    font-weight: 700;
+    transition-duration: 0.5s;
+  }
+}
+@keyframes go {
+  0% {
+    transform: none;
+    transform-origin: center;
+    border-width: 3px;
+  }
+  20% {
+    transform: scaleX(1.8) scaleY(1);
+    transform-origin: center;
+    border-width: 1px;
+  }
+  21% {
+    transform: scaleX(1.8) scaleY(1);
+    transform-origin: bottom;
+  }
+  40%,
+  100% {
+    transform: scaleX(1.8) scaleY(2.5);
+    transform-origin: bottom;
+  }
+}
+@keyframes go2 {
+  0% {
+    transform: none;
+    transform-origin: center;
+    border-width: 3px;
+  }
+  20% {
+    transform: scaleX(1.8) scaleY(1);
+    transform-origin: center;
+    border-width: 1px;
+  }
+  21%,
+  45% {
+    transform: scaleX(1.8) scaleY(1);
+    transform-origin: top;
+  }
+  65%,
+  100% {
+    transform: scaleX(1.8) scaleY(2.5);
+    transform-origin: top;
+  }
+}
+
+*[onclick$="()"] {
+  cursor: pointer;
+}
