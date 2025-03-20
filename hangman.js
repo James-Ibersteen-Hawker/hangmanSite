@@ -30,12 +30,15 @@ function start(mode) {
         .classList.add("open-card-anim-done");
       document.getElementsByTagName("STYLE")[0].append(`
         .openedCard::after, .openedCard::before {
+        transform: scaleX(1) scaleY(1);
+        animation: none;
         width: ${document.querySelector(".opening-card").offsetWidth * 1.8}px;
-        height: ${document.querySelector(".opening-card").offsetHeight * 2.5}px;
-        transform: scaleX(1) scaleY(0);
+        height: ${
+          (document.querySelector(".opening-card").offsetHeight / 2) * 2.5
+        }px;
         }  
       `);
-      document.querySelector(".opening-card").classList.add(".openedCard");
+      document.querySelector(".opening-card").classList.add("openedCard");
       document
         .querySelector(".opening-card")
         .classList.remove(".open-card-anim");
