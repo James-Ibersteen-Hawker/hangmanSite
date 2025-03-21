@@ -32,15 +32,29 @@
       <div class="opening-card">
         <div class="opening-text">
           <h1 class="text-center">Shamrock Hangman</h1>
-          <div class="button" onclick="modeButtons()">
-            <div class="slashdiv"></div>
-            <p>Play</p>
-          </div>
-          <div class="d-flex justify-content-center d-none">
-            <div class="btn btn-success m-1" onclick="start(1)">Easy</div>
-            <div class="btn btn-warning m-1" onclick="start(2)">Medium</div>
-            <div class="btn btn-danger m-1" onclick="start(3)">Hard</div>
-            <div class="btn btn-danger m-1" onclick="start(4)">Ridiculous</div>
+          <div class="buttons">
+            <div class="button-start" onclick="modeButtons()">
+              <div class="slashdiv"></div>
+              <p>Play</p>
+            </div>
+            <div class="d-flex justify-content-center d-none button-row">
+              <div class="m-1" onclick="start(1)">
+                <div class="subSlashDiv"></div>
+                Easy
+              </div>
+              <div class="m-1" onclick="start(2)">
+                <div class="subSlashDiv"></div>
+                Medium
+              </div>
+              <div class="m-1" onclick="start(3)">
+                <div class="subSlashDiv"></div>
+                Hard
+              </div>
+              <div class="m-1" onclick="start(4)">
+                <div class="subSlashDiv"></div>
+                Ridiculous
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+"use strict";
 const words = [
   "dyke",
   "abyss",
@@ -30,9 +31,11 @@ function start(mode) {
         .classList.add("open-card-anim-done");
       document.getElementsByTagName("STYLE")[0].append(`
         .openedCard::after, .openedCard::before {
-        transform: scaleX(1) scaleY(1) translateX(-22.2%);
+        position: absolute;
+        left: 50%;
+        transform: scaleX(1) scaleY(1) translateX(-50%);
         animation: none;
-        width: ${document.querySelector(".opening-card").offsetWidth * 1.8}px;
+        width: ${document.querySelector(".opening-card").offsetWidth * 1.6}px;
         height: ${
           (document.querySelector(".opening-card").offsetHeight / 2) * 2.5
         }px;
@@ -53,15 +56,25 @@ function start(mode) {
     if (mode == 3) return val.length > 7 && val.length <= 10;
     if (mode == 4) return val.length > 10;
   });
-  let game = new Game(Math.floor(Math.random() * selection.length));
+  let game = new Game(words[Math.floor(Math.random() * selection.length)]);
 }
 function modeButtons() {
-  document.querySelector(".button").classList.add("d-none");
-  document
-    .querySelector(".d-flex.justify-content-center.d-none")
-    .classList.remove("d-none");
+  get(".button-start").classList.add("fade-out");
+  let btnRow = get(".button-row");
+  btnRow.classList.remove("d-none");
+  btnRow.classList.add("fade-in");
+  let length = Array.from(document.querySelectorAll(".button-row .m-1"));
+  length = length[3];
+  document.querySelectorAll(".button-row .m-1").forEach((elem) => {
+    elem.setAttribute("style", `width: ${length.offsetWidth}px`);
+  });
+  setTimeout(() => {
+    get(".button-start").classList.add("d-none");
+    get(".button-start").classList.remove("fade-out");
+    btnRow.classList.add("d-block");
+    btnRow.classList.remove("fade-in");
+  }, 500);
 }
-
 class Game {
   word;
   constructor(word, mode) {
@@ -111,4 +124,7 @@ class Game {
       });
     }
   }
+}
+function get(arg) {
+  return document.querySelector(arg);
 }
