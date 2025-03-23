@@ -133,7 +133,6 @@ h1 {
     z-index: 1;
     height: 100%;
     width: 100%;
-    display: block;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -264,8 +263,8 @@ h1 {
 }
 .button-row .m-1 {
   height: 50px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 12px;
+  padding-right: 12px;
   padding-top: 0;
   display: flex;
   justify-content: center;
@@ -276,7 +275,48 @@ h1 {
   border: 4px outset var(--darkGreen);
   color: black;
   font-family: "Montserrat", sans-serif;
+  position: relative;
+  overflow: clip;
 }
-
-.button-row .m-1 {
+.subSlashDiv {
+  height: 100%;
+  width: 80%;
+  left: -110%;
+  background: rgba(3, 155, 3, 0.699);
+  position: absolute;
+  z-index: 0;
+  transform: skew(-30deg);
+  transition: 1s;
+  z-index: 0;
+}
+.button-row .m-1 p {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  transition-duration: 0.5s;
+  font-size: 18px;
+}
+.button-row .m-1:hover {
+  background: rgb(216, 216, 216);
+  width: 65%;
+  .subSlashDiv {
+    left: 110%;
+  }
+  p {
+    font-family: "Fleur De Leah", cursive;
+    color: rgb(88, 25, 0);
+    font-weight: 700;
+    transition-duration: 0.5s;
+  }
+}
+.openedCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

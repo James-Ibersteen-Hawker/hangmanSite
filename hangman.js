@@ -21,42 +21,47 @@ const words = [
   "Pneumonoultramicroscopicsilicovolcanoconiosis",
   "Hippopotomonstrosesquipedaliaphobia", //everything else
 ];
+let myGame;
 function start(mode) {
-  document.querySelector(".opening-text").classList.add("d-none");
-  document.querySelector(".opening-card").classList.add("open-card-anim");
+  get(".opening-text").classList.add("d-none");
+  get(".opening-card").classList.add("open-card-anim");
   setTimeout(
     () => {
-      document
-        .querySelector(".opening-card")
-        .classList.add("open-card-anim-done");
+      get(".opening-card").classList.add("open-card-anim-done");
+      let height = (get(".opening-card").offsetHeight / 2) * 2.5;
       document.getElementsByTagName("STYLE")[0].append(`
         .openedCard::after, .openedCard::before {
         position: absolute;
         left: 50%;
         transform: scaleX(1) scaleY(1) translateX(-50%);
         animation: none;
-        width: ${document.querySelector(".opening-card").offsetWidth * 1.6}px;
-        height: ${
-          (document.querySelector(".opening-card").offsetHeight / 2) * 2.5
-        }px;
+        width: ${get(".opening-card").offsetWidth * 1.6}px;
+        height: ${height}px;
         }  
+        .opening-card {
+        max-height: none !important;
+        width: ${get(".opening-card").offsetWidth * 1.6}px;
+        height: ${get(".opening-card").offsetHeight * 2.5}px !important;
+        }
       `);
-      document.querySelector(".opening-card").classList.add("openedCard");
-      document
-        .querySelector(".opening-card")
-        .classList.remove(".open-card-anim");
+      get(".opening-card").classList.add("openedCard");
+      get(".opening-card").classList.remove(".open-card-anim");
+      get(".gameText").classList.remove("d-none");
+      get(".gameText").classList.add("fade-in");
+      setTimeout(() => {
+        get(".gameText").classList.remove("fade-in");
+      }, 500);
     },
     4000,
     document
   );
-  ///////////////
   let selection = words.filter((val) => {
     if (mode == 1) return val.length <= 5;
     if (mode == 2) return val.length > 5 && val.length <= 7;
     if (mode == 3) return val.length > 7 && val.length <= 10;
     if (mode == 4) return val.length > 10;
   });
-  let game = new Game(words[Math.floor(Math.random() * selection.length)]);
+  myGame = new Game(words[Math.floor(Math.random() * selection.length)]);
 }
 function modeButtons() {
   get(".button-start").classList.add("fade-out");
@@ -110,17 +115,18 @@ class Game {
     ];
   }
   init() {
-    let container = document.querySelector(".wordCont");
+    let container = get(".wordCont");
     for (let i = 0; i < this.word.length; i++) {
       let div = document.createElement("div");
       div.id = `letter_${i}`;
+      div.textContent = " _ ";
       container.append(div);
     }
   }
   guess(arg) {
     if (this.word.includes(arg)) {
       this.word.forEach((val, ind) => {
-        document.querySelector(`#letter_${ind}`).textContent = val;
+        get(`#letter_${ind}`).textContent = val;
       });
     }
   }
@@ -128,3 +134,8 @@ class Game {
 function get(arg) {
   return document.querySelector(arg);
 }
+window.addEventListener("keydown", (event) => {
+  if (event.key == "Enter" && get(".guess").value != " ") {
+    myGame.guess(get(".guess").value.toLowerCase());
+  }
+});
