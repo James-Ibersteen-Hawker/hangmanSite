@@ -61,7 +61,8 @@ function start(mode) {
     if (mode == 3) return val.length > 7 && val.length <= 10;
     if (mode == 4) return val.length > 10;
   });
-  myGame = new Game(words[Math.floor(Math.random() * selection.length)]);
+  myGame = new Game(selection[Math.floor(Math.random() * selection.length)]);
+  myGame.init();
 }
 function modeButtons() {
   get(".button-start").classList.add("fade-out");
@@ -116,18 +117,23 @@ class Game {
   }
   init() {
     let container = get(".wordCont");
+    let lines = [];
     for (let i = 0; i < this.word.length; i++) {
-      let div = document.createElement("div");
-      div.id = `letter_${i}`;
-      div.textContent = " _ ";
-      container.append(div);
+      lines.push(" _ ");
     }
+    container.textContent = lines.join("");
   }
   guess(arg) {
+    alert(arg);
     if (this.word.includes(arg)) {
-      this.word.forEach((val, ind) => {
-        get(`#letter_${ind}`).textContent = val;
+      let spaces = get(".wordCont").split(" ");
+      spaces.forEach((space, index) => {
+        if (this.word[index] == arg) space = ` ${arg} `;
       });
+      get(".wordCont").textContent = spaces.join("");
+      get(".wordCont").insertAdjacentText("beforeend", `${arg} included`);
+    } else {
+      get(".wordCont").insertAdjacentText("beforeend", `${arg} not included`);
     }
   }
 }
@@ -135,7 +141,8 @@ function get(arg) {
   return document.querySelector(arg);
 }
 window.addEventListener("keydown", (event) => {
-  if (event.key == "Enter" && get(".guess").value != " ") {
-    myGame.guess(get(".guess").value.toLowerCase());
+  if (event.key == "Enter" && get("#guess").value != "") {
+    myGame.guess(get("#guess").value.toLowerCase());
+    get(".guess").value = "";
   }
 });

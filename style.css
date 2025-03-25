@@ -320,3 +320,16 @@ h1 {
   justify-content: center;
   align-items: center;
 }
+.gameText {
+  width: 100%;
+  height: 100%;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+canvas {
+  width: 90%;
+  aspect-ratio: 4/2.9;
+  border: 1px solid red;
+}
