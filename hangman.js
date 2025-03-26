@@ -22,6 +22,8 @@ const words = [
   "Hippopotomonstrosesquipedaliaphobia", //everything else
 ];
 let myGame;
+const canvas = get("canvas");
+const ctx = canvas.getContext("2d");
 function start(mode) {
   get(".opening-text").classList.add("d-none");
   get(".opening-card").classList.add("open-card-anim");
@@ -61,7 +63,7 @@ function start(mode) {
     if (mode == 3) return val.length > 7 && val.length <= 10;
     if (mode == 4) return val.length > 10;
   });
-  myGame = new Game(selection[Math.floor(Math.random() * selection.length)]);
+  myGame = new Game(selection[Math.floor(Math.random() * selection.length)], 0);
   myGame.init();
 }
 function modeButtons() {
@@ -83,6 +85,7 @@ function modeButtons() {
 }
 class Game {
   word;
+  #stage;
   constructor(word, mode) {
     this.word = word.split("");
     this.mode = mode;
@@ -114,26 +117,38 @@ class Game {
       "y",
       "z",
     ];
+    this.slots = [];
+    this.not = [];
+  }
+  get stage() {
+    return this.#stage;
+  }
+  stageIncr() {
+    let cS = this.#stage;
   }
   init() {
     let container = get(".wordCont");
-    let lines = [];
-    for (let i = 0; i < this.word.length; i++) {
-      lines.push(" _ ");
+    this.slots = new Array(this.word.length);
+    for (let i = 0; i < this.slots.length; i++) {
+      this.slots[i] = "_";
     }
-    container.textContent = lines.join("");
+    container.textContent = this.slots.join(" ");
   }
   guess(arg) {
-    alert(arg);
+    if (
+      this.not.includes(arg) ||
+      get(".wordCont").textContent.split(" ").includes(arg)
+    )
+      return;
     if (this.word.includes(arg)) {
-      let spaces = get(".wordCont").split(" ");
-      spaces.forEach((space, index) => {
-        if (this.word[index] == arg) space = ` ${arg} `;
-      });
-      get(".wordCont").textContent = spaces.join("");
-      get(".wordCont").insertAdjacentText("beforeend", `${arg} included`);
+      for (let i = 0; i < this.word.length; i++) {
+        if (this.word[i] == arg) {
+          this.slots[i] = arg;
+        }
+      }
+      get(".wordCont").textContent = this.slots.join(" ");
     } else {
-      get(".wordCont").insertAdjacentText("beforeend", `${arg} not included`);
+      this.not.push(arg);
     }
   }
 }
@@ -143,6 +158,6 @@ function get(arg) {
 window.addEventListener("keydown", (event) => {
   if (event.key == "Enter" && get("#guess").value != "") {
     myGame.guess(get("#guess").value.toLowerCase());
-    get(".guess").value = "";
+    get("#guess").value = "";
   }
 });
