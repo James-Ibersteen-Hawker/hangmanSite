@@ -23,7 +23,7 @@ const words = [
   "hippopotomonstrosesquipedaliaphobia", //everything else
 ];
 let myGame;
-const canvas = get("canvas");
+const canvas = get("#canvas");
 const ctx = canvas.getContext("2d");
 function start(mode) {
   get(".opening-text").classList.add("d-none");
@@ -162,3 +162,12 @@ window.addEventListener("keydown", (event) => {
     get("#guess").value = "";
   }
 });
+let myCurve = bezier(
+  20,
+  5,
+  ctx,
+  { x: 0, y: 0 },
+  { x: 400, y: 0 },
+  { x: 400, y: 400 }
+);
+myCurve.draw(0, 2, "blue");

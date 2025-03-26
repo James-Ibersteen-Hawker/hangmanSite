@@ -1,4 +1,4 @@
-export function bezier(resInput, ppp, canvasContext, ...points) {
+function bezier(resInput, ppp, canvasContext, ...points) {
   if (points.length < 2)
     throw new Error("reached minimum points. Minimum points needed is 2");
   if (resInput < 4)
