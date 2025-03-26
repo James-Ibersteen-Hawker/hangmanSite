@@ -335,13 +335,16 @@ h1 {
   padding-left: 10px;
   padding-right: 10px;
   word-break: break-all;
+  font-family: "Montserrat", sans-serif;
 }
 canvas {
   width: 90%;
   aspect-ratio: 4/2.3;
   /* border: 1px solid red; */
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-bottom: 2px solid black;
+  /* border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px; */
+  margin-bottom: 15px;
 }
 .difficulty {
   width: 90%;
@@ -379,13 +382,14 @@ input {
   margin-right: 10px;
   display: block;
   border-radius: 10px;
-  border: none;
   padding: 3px;
+  padding-left: 10px;
+  border: 2px solid green;
   font-family: "Montserrat", sans-serif;
 }
 input:focus {
   outline: 0px;
-  border: 1px solid rgb(0, 77, 10);
+  border: 3px solid rgb(0, 77, 10);
 }
 .button-submit {
   height: 50px;
@@ -405,6 +409,7 @@ input:focus {
   font-family: "Montserrat", sans-serif;
   position: relative;
   overflow: clip;
+  transition: 0.5s;
 }
 .button-slashdiv {
   height: 100%;
