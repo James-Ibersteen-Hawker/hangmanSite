@@ -24,6 +24,7 @@ body {
   background-repeat: repeat;
   position: relative;
   background-size: 200px 200px;
+  overflow: hidden;
 }
 @font-face {
   font-family: Sunday;
@@ -32,6 +33,7 @@ body {
 * {
   padding: 0;
   margin: 0;
+  user-select: none;
 }
 *[onclick$="()"] {
   cursor: pointer;
@@ -241,7 +243,6 @@ h1 {
   }
   100% {
     opacity: 0;
-    display: none;
   }
 }
 .buttons {
@@ -323,11 +324,17 @@ h1 {
 .gameText {
   width: 100%;
   height: 100%;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.wordCont {
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  word-break: break-all;
 }
 canvas {
   width: 90%;
@@ -339,8 +346,102 @@ canvas {
 .difficulty {
   width: 90%;
   height: auto;
-  background: green;
-  border: 3px outset var(--darkGreen);
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
+  color: black;
   border-radius: 5px;
   margin-bottom: 5px;
+}
+#easy {
+  background: rgba(0, 134, 0, 0.404);
+  border: 3px outset var(--darkGreen);
+}
+#medium {
+  background: rgba(134, 109, 0, 0.404);
+  border: 3px outset rgb(145, 118, 0);
+}
+#hard {
+  background: rgba(134, 0, 0, 0.404);
+  border: 3px outset rgb(145, 0, 0);
+}
+#ridiculous {
+  background: rgba(134, 0, 134, 0.404);
+  border: 3px outset rgb(180, 0, 141);
+}
+.input-row {
+  display: flex;
+  justify-content: center;
+  width: 90% !important;
+  /* border: 1px solid red; */
+}
+input {
+  width: 70% !important;
+  margin-right: 10px;
+  display: block;
+  border-radius: 10px;
+  border: none;
+  padding: 3px;
+  font-family: "Montserrat", sans-serif;
+}
+input:focus {
+  outline: 0px;
+  border: 1px solid rgb(0, 77, 10);
+}
+.button-submit {
+  height: 50px;
+  width: 30%;
+  display: block;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--white);
+  border-radius: 10px;
+  cursor: pointer;
+  border: 4px outset var(--darkGreen);
+  color: black;
+  font-family: "Montserrat", sans-serif;
+  position: relative;
+  overflow: clip;
+}
+.button-slashdiv {
+  height: 100%;
+  width: 80%;
+  left: -110%;
+  background: rgba(3, 155, 3, 0.699);
+  position: absolute;
+  z-index: 0;
+  transform: skew(-30deg);
+  transition: 1s;
+  z-index: 0;
+}
+.button-submit p {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  transition-duration: 0.5s;
+  font-size: 18px;
+}
+.button-submit:hover {
+  background: rgb(216, 216, 216);
+  .button-slashdiv {
+    left: 110%;
+  }
+  p {
+    font-family: "Fleur De Leah", cursive;
+    color: rgb(88, 25, 0);
+    font-weight: 700;
+    transition-duration: 0.5s;
+  }
+}
+.wordContainer {
+  position: relative;
 }

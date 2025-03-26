@@ -64,6 +64,24 @@ function start(mode) {
     if (mode == 3) return val.length > 7 && val.length <= 10;
     if (mode == 4) return val.length > 10;
   });
+  switch (mode) {
+    case 1:
+      get(".difficulty").textContent = "Easy Mode";
+      get(".difficulty").id = "easy";
+      break;
+    case 2:
+      get(".difficulty").textContent = "Medium Mode";
+      get(".difficulty").id = "medium";
+      break;
+    case 3:
+      get(".difficulty").textContent = "Hard Mode";
+      get(".difficulty").id = "hard";
+      break;
+    case 4:
+      get(".difficulty").textContent = "Ridiculous Mode";
+      get(".difficulty").id = "ridiculous";
+      break;
+  }
   myGame = new Game(selection[Math.floor(Math.random() * selection.length)], 0);
   myGame.init();
 }
@@ -136,11 +154,6 @@ class Game {
     container.textContent = this.slots.join(" ");
   }
   guess(arg) {
-    if (
-      this.not.includes(arg) ||
-      get(".wordCont").textContent.split(" ").includes(arg)
-    )
-      return;
     if (this.word.includes(arg)) {
       for (let i = 0; i < this.word.length; i++) {
         if (this.word[i] == arg) {
@@ -151,6 +164,27 @@ class Game {
     } else {
       this.not.push(arg);
     }
+    if (this.slots.join("") == this.word.join("")) {
+      get(".wordCont").classList.add("fade-out");
+      setTimeout(
+        () => {
+          get(".wordCont").textContent = this.slots.join("");
+          if (
+            this.slots.join("").includes("tau") ||
+            this.slots.join("").includes("llan") ||
+            this.slots.join("").includes("char")
+          ) {
+            get(".wordCont").textContent =
+              this.slots[0].toUpperCase() +
+              this.slots.slice(1, this.slots.length).join("");
+          }
+          get(".wordCont").classList.remove("fade-out");
+          get(".wordCont").classList.add("fade-in");
+        },
+        500,
+        this
+      );
+    }
   }
 }
 function get(arg) {
@@ -158,6 +192,14 @@ function get(arg) {
 }
 window.addEventListener("keydown", (event) => {
   if (event.key == "Enter" && get("#guess").value != "") {
+    if (get("#guess").value.split("").length > 1) return;
+    if (myGame.not.includes(get("#guess").value.toLowerCase())) return;
+    if (
+      get(".wordCont")
+        .textContent.split(" ")
+        .includes(get("#guess").value.toLowerCase())
+    )
+      return;
     myGame.guess(get("#guess").value.toLowerCase());
     get("#guess").value = "";
   }
