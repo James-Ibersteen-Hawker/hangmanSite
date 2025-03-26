@@ -1,4 +1,5 @@
 "use strict";
+// import bezier from "./bezier.js";
 const words = [
   "dyke",
   "abyss",
@@ -15,11 +16,11 @@ const words = [
   "jackhammer",
   "leprechaun",
   "tablecloth", //10 or lower
-  "Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu",
-  "Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch",
-  "Chargoggaggoggmanchauggaggoggcharbunugungamaugg",
-  "Pneumonoultramicroscopicsilicovolcanoconiosis",
-  "Hippopotomonstrosesquipedaliaphobia", //everything else
+  "taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu",
+  "llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch",
+  "chargoggaggoggmanchauggaggoggcharbunugungamaugg",
+  "pneumonoultramicroscopicsilicovolcanoconiosis",
+  "hippopotomonstrosesquipedaliaphobia", //everything else
 ];
 let myGame;
 const canvas = get("canvas");
