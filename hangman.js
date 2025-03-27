@@ -167,7 +167,7 @@ class Game {
       head.draw(15, 2, "rgb(0,0,0)");
     }
     if (cS == 2) {
-      let rArm = bezier(
+      let body = bezier(
         80,
         3,
         ctx,
@@ -175,19 +175,51 @@ class Game {
         { x: 170, y: height - 120 },
         { x: 170, y: height - 80 }
       );
-      rArm.draw(15, 4, "rgb(0,0,0)");
+      body.draw(15, 4, "rgb(0,0,0)");
     }
     if (cS == 3) {
       let rArm = bezier(
         80,
         3,
         ctx,
-        { x: 173, y: height - 200 },
-        { x: 215, y: height - 150 },
-        { x: 125, y: height - 150 },
-        { x: 167, y: height - 200 }
+        { x: 170, y: height - 160 },
+        { x: 185, y: height - 145 },
+        { x: 200, y: height - 130 }
       );
       rArm.draw(15, 2, "rgb(0,0,0)");
+    }
+    if (cS == 4) {
+      let lArm = bezier(
+        80,
+        3,
+        ctx,
+        { x: 170, y: height - 160 },
+        { x: 155, y: height - 145 },
+        { x: 140, y: height - 130 }
+      );
+      lArm.draw(15, 2, "rgb(0,0,0)");
+    }
+    if (cS == 5) {
+      let rLeg = bezier(
+        80,
+        3,
+        ctx,
+        { x: 170, y: height - 160 },
+        { x: 185, y: height - 145 },
+        { x: 200, y: height - 130 }
+      );
+      rLeg.draw(15, 2, "rgb(0,0,0)");
+    }
+    if (cS == 6) {
+      let lLeg = bezier(
+        80,
+        3,
+        ctx,
+        { x: 170, y: height - 160 },
+        { x: 155, y: height - 145 },
+        { x: 140, y: height - 130 }
+      );
+      lLeg.draw(15, 2, "rgb(0,0,0)");
     }
     //3 more stages
   }
