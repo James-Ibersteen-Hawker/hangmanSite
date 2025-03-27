@@ -340,6 +340,8 @@ h1 {
 canvas {
   width: 90%;
   aspect-ratio: 4/2.3;
+  min-height: 200px;
+  min-width: 350px;
   /* border: 1px solid red; */
   border-bottom: 2px solid black;
   /* border-bottom-right-radius: 5px;
@@ -449,4 +451,7 @@ input:focus {
 }
 .wordContainer {
   position: relative;
+}
+.off {
+  pointer-events: none;
 }

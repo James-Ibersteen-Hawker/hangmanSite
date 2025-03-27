@@ -164,6 +164,7 @@ class Game {
         { x: 125, y: height - 150 },
         { x: 167, y: height - 200 }
       );
+      this.stop(head.points.length * 15);
       head.draw(15, 2, "rgb(0,0,0)");
     }
     if (cS == 2) {
@@ -175,6 +176,7 @@ class Game {
         { x: 170, y: height - 120 },
         { x: 170, y: height - 80 }
       );
+      this.stop(body.points.length * 15);
       body.draw(15, 4, "rgb(0,0,0)");
     }
     if (cS == 3) {
@@ -186,6 +188,7 @@ class Game {
         { x: 185, y: height - 145 },
         { x: 200, y: height - 130 }
       );
+      this.stop(rArm.points.length * 15);
       rArm.draw(15, 2, "rgb(0,0,0)");
     }
     if (cS == 4) {
@@ -197,6 +200,7 @@ class Game {
         { x: 155, y: height - 145 },
         { x: 140, y: height - 130 }
       );
+      this.stop(lArm.points.length * 15);
       lArm.draw(15, 2, "rgb(0,0,0)");
     }
     if (cS == 5) {
@@ -204,10 +208,11 @@ class Game {
         80,
         3,
         ctx,
-        { x: 170, y: height - 160 },
-        { x: 185, y: height - 145 },
-        { x: 200, y: height - 130 }
+        { x: 170, y: height - 80 },
+        { x: 185, y: height - 65 },
+        { x: 195, y: height - 50 }
       );
+      this.stop(rLeg.points.length * 15);
       rLeg.draw(15, 2, "rgb(0,0,0)");
     }
     if (cS == 6) {
@@ -215,11 +220,13 @@ class Game {
         80,
         3,
         ctx,
-        { x: 170, y: height - 160 },
-        { x: 155, y: height - 145 },
-        { x: 140, y: height - 130 }
+        { x: 170, y: height - 80 },
+        { x: 155, y: height - 65 },
+        { x: 145, y: height - 50 }
       );
+      this.stop(lLeg.points.length * 15);
       lLeg.draw(15, 2, "rgb(0,0,0)");
+      this.end(2);
     }
     //3 more stages
   }
@@ -243,7 +250,7 @@ class Game {
     ctx.fillRect(63, height - 234, 110, 14);
     ctx.stroke();
     //string
-    ctx.fillRect(167, height - 220, 6, 20);
+    ctx.fillRect(168, height - 220, 4, 20);
     ctx.stroke();
   }
   guess(arg) {
@@ -274,10 +281,31 @@ class Game {
           }
           get(".wordCont").classList.remove("fade-out");
           get(".wordCont").classList.add("fade-in");
+          setTimeout(() => {
+            this.end(1);
+          }, 2000);
         },
         500,
         this
       );
+    }
+  }
+  stop(arg) {
+    get("#guess").classList.add("off");
+    get("#guess").disabled = true;
+    setTimeout(() => {
+      get("#guess").classList.remove("off");
+      get("#guess").disabled = false;
+      get("#guess").focus();
+    }, arg);
+  }
+  end(arg) {
+    //invert zoom in animation, restore initial box with everything but buttons
+
+    if (arg == 1) {
+      alert(`You figured out the word ${this.word.join("")}`);
+    } else if (arg == 2) {
+      alert(`You failed to figure out the word ${this.word.join("")}`);
     }
   }
 }
