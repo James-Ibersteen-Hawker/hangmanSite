@@ -455,3 +455,55 @@ input:focus {
 .off {
   pointer-events: none;
 }
+@keyframes goback {
+  0% {
+    transform: scaleX(1.6) scaleY(2.5);
+    transform-origin: bottom;
+  }
+  20% {
+    transform: scaleX(1.6) scaleY(1);
+    transform-origin: bottom;
+  }
+  21% {
+    transform: scaleX(1.6) scaleY(1);
+    transform-origin: center;
+    border-width: 1px;
+  }
+  65%,
+  100% {
+    transform: none;
+    transform-origin: center;
+    border-width: 3px;
+  }
+}
+/*x=1.6, y=2.5*/
+@keyframes go2back {
+  0%,
+  20% {
+    transform-origin: top;
+    transform: scaleX(1.6) scaleY(2.5);
+  }
+  40% {
+    transform-origin: top;
+    transform: scaleX(1.6) scaleY(1);
+  }
+  65%,
+  100% {
+    transform: scaleX(1 scaleY(1));
+    border-width: 3px;
+  }
+}
+.close-card-anim::before {
+  animation-name: goback;
+  animation-duration: 5s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+.close-card-anim::after {
+  animation-name: go2back;
+  animation-duration: 5s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}

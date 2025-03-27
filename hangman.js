@@ -48,7 +48,7 @@ function start(mode) {
         }
       `);
       get(".opening-card").classList.add("openedCard");
-      get(".opening-card").classList.remove(".open-card-anim");
+      get(".opening-card").classList.remove("open-card-anim");
       get(".gameText").classList.remove("d-none");
       get(".gameText").classList.add("fade-in");
       setTimeout(() => {
@@ -238,6 +238,7 @@ class Game {
     }
     container.textContent = this.slots.join(" ");
     this.gallows();
+    get("#guess").focus();
   }
   gallows() {
     let width = Number(canvas.offsetWidth);
@@ -301,12 +302,18 @@ class Game {
   }
   end(arg) {
     //invert zoom in animation, restore initial box with everything but buttons
-
-    if (arg == 1) {
-      alert(`You figured out the word ${this.word.join("")}`);
-    } else if (arg == 2) {
-      alert(`You failed to figure out the word ${this.word.join("")}`);
-    }
+    let container = get(".openedCard");
+    get(".gameText").classList.add("d-none");
+    container.classList.remove("open-card-anim-done");
+    container.classList.remove("openedCard");
+    container.classList.add("close-card-anim");
+    document.getElementsByTagName("STYLE")[0].innerHTML = "";
+    alert(container.classList);
+    // if (arg == 1) {
+    //   alert(`You figured out the word ${this.word.join("")}`);
+    // } else if (arg == 2) {
+    //   alert(`You failed to figure out the word ${this.word.join("")}`);
+    // }
   }
 }
 function get(arg) {
