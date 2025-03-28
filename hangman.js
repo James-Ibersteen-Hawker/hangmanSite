@@ -26,10 +26,14 @@ let myGame;
 const canvas = get("#canvas");
 const ctx = canvas.getContext("2d");
 function start(mode) {
+  alert("startmode");
+  get("#guess").disabled = false;
   get(".opening-text").classList.add("d-none");
   get(".opening-card").classList.add("open-card-anim");
+  alert(get(".opening-card").classList);
   setTimeout(
     () => {
+      alert("here!");
       get(".opening-card").classList.add("open-card-anim-done");
       let height = (get(".opening-card").offsetHeight / 2) * 2.5;
       document.getElementsByTagName("STYLE")[0].append(`
@@ -268,6 +272,7 @@ class Game {
     }
     if (this.slots.join("") == this.word.join("")) {
       get(".wordCont").classList.add("fade-out");
+      get("#guess").disabled = true;
       setTimeout(
         () => {
           get(".wordCont").textContent = this.slots.join("");
@@ -301,7 +306,6 @@ class Game {
     }, arg);
   }
   end(arg) {
-    get("#guess").disabled = true;
     let container = get(".openedCard");
     get(".gameText").classList.add("fade-out");
     setTimeout(
@@ -314,6 +318,7 @@ class Game {
         document.getElementsByTagName("STYLE")[0].innerHTML = "";
         setTimeout(
           () => {
+            container.classList.remove("close-card-anim");
             if (arg == 1) {
               get("#winnerMessage").textContent = "Victory!";
               get(".winText").classList.remove("d-none");
