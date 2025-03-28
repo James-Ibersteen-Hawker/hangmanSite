@@ -371,11 +371,11 @@ get("#submitButton").addEventListener("onclick", () => {
     get("#guess").value = "";
   }
 });
-get("#again").addEventListener("onclick", () => {
+function reset() {
   alert("here!");
   //again!
   myGame = null;
-  canvas.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+  ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
   alert("here!");
   get(".winText").classList.add("fade-out");
   get(".opening-text").classList.remove("d-none");
@@ -386,4 +386,4 @@ get("#again").addEventListener("onclick", () => {
     get(".winText").classList.add("d-none");
     get(".opening-text").classList.remove("fade-in");
   }, 500);
-});
+}
