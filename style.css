@@ -215,6 +215,7 @@ h1 {
   animation-duration: 0.5s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
+  pointer-events: none;
 }
 @keyframes fadeIn {
   0% {
@@ -231,15 +232,14 @@ h1 {
   animation-duration: 0.5s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
+  pointer-events: none;
 }
 @keyframes fadeOut {
   0% {
     opacity: 1;
-    display: block;
   }
   99% {
     opacity: 0;
-    display: block;
   }
   100% {
     opacity: 0;
@@ -455,55 +455,22 @@ input:focus {
 .off {
   pointer-events: none;
 }
-@keyframes goback {
-  0% {
-    transform: scaleX(1.6) scaleY(2.5);
-    transform-origin: bottom;
-  }
-  20% {
-    transform: scaleX(1.6) scaleY(1);
-    transform-origin: bottom;
-  }
-  21% {
-    transform: scaleX(1.6) scaleY(1);
-    transform-origin: center;
-    border-width: 1px;
-  }
-  65%,
-  100% {
-    transform: none;
-    transform-origin: center;
-    border-width: 3px;
-  }
-}
-/*x=1.6, y=2.5*/
-@keyframes go2back {
-  0%,
-  20% {
-    transform-origin: top;
-    transform: scaleX(1.6) scaleY(2.5);
-  }
-  40% {
-    transform-origin: top;
-    transform: scaleX(1.6) scaleY(1);
-  }
-  65%,
-  100% {
-    transform: scaleX(1 scaleY(1));
-    border-width: 3px;
-  }
-}
 .close-card-anim::before {
-  animation-name: goback;
+  animation-name: go;
   animation-duration: 5s;
   animation-timing-function: ease-in;
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
+  animation-direction: reverse;
 }
 .close-card-anim::after {
-  animation-name: go2back;
+  animation-name: go2;
   animation-duration: 5s;
   animation-timing-function: ease-in;
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
+  animation-direction: reverse;
+}
+#again {
+  cursor: pointer;
 }

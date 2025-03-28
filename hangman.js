@@ -301,19 +301,43 @@ class Game {
     }, arg);
   }
   end(arg) {
-    //invert zoom in animation, restore initial box with everything but buttons
+    get("#guess").disabled = true;
     let container = get(".openedCard");
-    get(".gameText").classList.add("d-none");
-    container.classList.remove("open-card-anim-done");
-    container.classList.remove("openedCard");
-    container.classList.add("close-card-anim");
-    document.getElementsByTagName("STYLE")[0].innerHTML = "";
-    alert(container.classList);
-    // if (arg == 1) {
-    //   alert(`You figured out the word ${this.word.join("")}`);
-    // } else if (arg == 2) {
-    //   alert(`You failed to figure out the word ${this.word.join("")}`);
-    // }
+    get(".gameText").classList.add("fade-out");
+    setTimeout(
+      () => {
+        get(".gameText").classList.remove("fade-out");
+        get(".gameText").classList.add("d-none");
+        container.classList.remove("open-card-anim-done");
+        container.classList.remove("openedCard");
+        container.classList.add("close-card-anim");
+        document.getElementsByTagName("STYLE")[0].innerHTML = "";
+        setTimeout(
+          () => {
+            if (arg == 1) {
+              get("#winnerMessage").textContent = "Victory!";
+              get(".winText").classList.remove("d-none");
+              get(".winText").classList.add("fade-in");
+              setTimeout(() => {
+                get(".winText").classList.remove("fade-in");
+              }, 500);
+            } else if (arg == 2) {
+              get("#winnerMessage").textContent = "Defeated!";
+              get(".winText").classList.remove("d-none");
+              get(".winText").classList.add("fade-in");
+              setTimeout(() => {
+                get(".winText").classList.remove("fade-in");
+              }, 500);
+            }
+          },
+          5000,
+          arg
+        );
+      },
+      500,
+      container,
+      arg
+    );
   }
 }
 function get(arg) {
@@ -346,4 +370,20 @@ get("#submitButton").addEventListener("onclick", () => {
     myGame.guess(get("#guess").value.toLowerCase());
     get("#guess").value = "";
   }
+});
+get("#again").addEventListener("onclick", () => {
+  alert("here!");
+  //again!
+  myGame = null;
+  canvas.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+  alert("here!");
+  get(".winText").classList.add("fade-out");
+  get(".opening-text").classList.remove("d-none");
+  get(".graveyard").classList.remove("d-none");
+  get(".opening-text").classList.add("fade-in");
+  setTimeout(() => {
+    get(".winText").classList.remove("fade-out");
+    get(".winText").classList.add("d-none");
+    get(".opening-text").classList.remove("fade-in");
+  }, 500);
 });
