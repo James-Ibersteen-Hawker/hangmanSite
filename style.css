@@ -532,10 +532,18 @@ input:focus {
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 20px;
-  height: 40px;
-  background: red;
+  width: 60px;
+  height: 70px;
+  background: url(grave.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
   overflow: clip;
+  filter: drop-shadow(0px 0px 1px var(--darkGreen));
+  transition: 0.3s;
+}
+.graveyard:hover {
+  filter: drop-shadow(0px 0px 3px var(--darkGreen));
 }
 .rightWord {
   color: var(--darkGreen);

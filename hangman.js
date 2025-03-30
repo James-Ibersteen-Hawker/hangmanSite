@@ -22,6 +22,7 @@ const words = [
   "pneumonoultramicroscopicsilicovolcanoconiosis",
   "hippopotomonstrosesquipedaliaphobia", //everything else
 ];
+let deadWords = [];
 let myGame;
 const canvas = get("#canvas");
 const ctx = canvas.getContext("2d");
@@ -162,7 +163,7 @@ class Game {
         { x: 171, y: height - 160 },
         { x: 215, y: height - 215 },
         { x: 125, y: height - 215 },
-        { x: 169, y: height - 160 }
+        { x: 168, y: height - 160 }
       );
       this.stop(head.points.length * 15);
       head.draw(15, 2, "rgb(0,0,0)");
@@ -216,6 +217,7 @@ class Game {
       rLeg.draw(15, 2, "rgb(0,0,0)");
     }
     if (cS == 6) {
+      deadWords.push(this.word.join(""));
       let lLeg = bezier(
         80,
         3,
@@ -462,6 +464,18 @@ function reset() {
     get(".opening-text").classList.add("fade-in");
     setTimeout(() => {
       get(".opening-text").classList.remove("fade-in");
+    }, 500);
+  }, 500);
+}
+function graveyard() {
+  get(".opening-text").classList.add("fade-out");
+  setTimeout(() => {
+    get(".opening-text").classList.add("d-none");
+    get(".opening-text").classList.remove("fade-out");
+    get(".graveText").classList.add("fade-in");
+    get(".graveText").classList.remove("d-none");
+    setTimeout(() => {
+      get(".graveText").classList.remove("fade-in");
     }, 500);
   }, 500);
 }
