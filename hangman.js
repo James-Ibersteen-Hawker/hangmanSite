@@ -152,7 +152,6 @@ class Game {
     let cS = this.stage;
     cS++;
     this.stage = cS;
-    let width = Number(canvas.offsetWidth);
     let height = Number(canvas.offsetHeight);
     //6 stages
     if (cS == 1) {
@@ -160,10 +159,10 @@ class Game {
         80,
         3,
         ctx,
-        { x: 173, y: height - 200 },
-        { x: 215, y: height - 150 },
-        { x: 125, y: height - 150 },
-        { x: 167, y: height - 200 }
+        { x: 171, y: height - 160 },
+        { x: 215, y: height - 215 },
+        { x: 125, y: height - 215 },
+        { x: 169, y: height - 160 }
       );
       this.stop(head.points.length * 15);
       head.draw(15, 2, "rgb(0,0,0)");
@@ -325,7 +324,7 @@ class Game {
           }, 500);
           setTimeout(() => {
             this.end(1);
-          }, 2000);
+          }, 1500);
         },
         500,
         this

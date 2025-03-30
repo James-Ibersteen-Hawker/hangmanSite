@@ -305,6 +305,24 @@ h1 {
   transition-duration: 0.5s;
   font-size: 18px;
 }
+.button-row .m-1:nth-child(2) {
+  border: 4px outset rgb(145, 118, 0);
+  .subSlashDiv {
+    background: rgba(134, 109, 0, 0.404);
+  }
+}
+.button-row .m-1:nth-child(3) {
+  border: 4px outset rgb(145, 0, 0);
+  .subSlashDiv {
+    background: rgba(134, 0, 0, 0.404);
+  }
+}
+.button-row .m-1:nth-child(4) {
+  border: 4px outset rgb(180, 0, 141);
+  .subSlashDiv {
+    background: rgba(134, 0, 134, 0.404);
+  }
+}
 .button-row .m-1:hover {
   background: rgb(216, 216, 216);
   width: 65%;
