@@ -519,3 +519,9 @@ input:focus {
   background: red;
   overflow: clip;
 }
+.rightWord {
+  color: var(--darkGreen);
+}
+.wrongWord {
+  color: maroon;
+}

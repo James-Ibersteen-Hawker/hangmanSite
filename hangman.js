@@ -227,9 +227,42 @@ class Game {
       );
       this.stop(lLeg.points.length * 15);
       lLeg.draw(15, 2, "rgb(0,0,0)");
-      setTimeout(() => {
-        this.end(2);
-      }, lLeg.points.length * 15 + 20);
+      setTimeout(
+        () => {
+          get(".wordCont").classList.add("fade-out");
+          get("#guess").disabled = true;
+          setTimeout(
+            () => {
+              get(".wordCont").classList.add("wrongWord");
+              if (
+                this.slots.join("").includes("tau") ||
+                this.slots.join("").includes("llan") ||
+                this.slots.join("").includes("char")
+              ) {
+                get(".wordCont").textContent =
+                  this.slots[0].toUpperCase() +
+                  this.slots.slice(1, this.slots.length).join("");
+              } else {
+                get(".wordCont").textContent = this.word.join("");
+              }
+              get(".wordCont").classList.remove("fade-out");
+              get(".wordCont").classList.add("fade-in");
+              setTimeout(
+                () => {
+                  get(".wordCont").classList.remove("fade-in");
+                  this.end(2);
+                },
+                1000,
+                this
+              );
+            },
+            500,
+            this
+          );
+        },
+        lLeg.points.length * 15 + 20,
+        this
+      );
     }
   }
   init() {
@@ -285,7 +318,11 @@ class Game {
               this.slots.slice(1, this.slots.length).join("");
           }
           get(".wordCont").classList.remove("fade-out");
+          get(".wordCont").classList.add("rightWord");
           get(".wordCont").classList.add("fade-in");
+          setTimeout(() => {
+            get(".wordCont").classList.remove("fade-in");
+          }, 500);
           setTimeout(() => {
             this.end(1);
           }, 2000);
@@ -416,6 +453,8 @@ function reset() {
   myGame = null;
   ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
   get(".winText").classList.add("fade-out");
+  get(".wordCont").classList.remove("rightWord");
+  get(".wordCont").classList.remove("wrongWord");
   setTimeout(() => {
     get(".winText").classList.remove("fade-out");
     get(".winText").classList.add("d-none");
