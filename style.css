@@ -279,7 +279,8 @@ h1 {
   position: relative;
   overflow: clip;
 }
-.subSlashDiv {
+.subSlashDiv,
+.againSlash {
   height: 100%;
   width: 80%;
   left: -110%;
@@ -290,7 +291,8 @@ h1 {
   transition: 1s;
   z-index: 0;
 }
-.button-row .m-1 p {
+.button-row .m-1 p,
+#again p {
   position: relative;
   z-index: 1;
   height: 100%;
@@ -471,8 +473,42 @@ input:focus {
   animation-iteration-count: 1;
   animation-direction: reverse;
 }
+.winText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 #again {
+  height: 50px;
+  width: 65%;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--white);
+  border-radius: 10px;
   cursor: pointer;
+  border: 4px outset var(--darkGreen);
+  color: black;
+  font-family: "Montserrat", sans-serif;
+  position: relative;
+  overflow: clip;
+}
+#again:hover {
+  background: rgb(216, 216, 216);
+  width: 65%;
+  .againSlash {
+    left: 110%;
+  }
+  p {
+    font-family: "Fleur De Leah", cursive;
+    color: rgb(88, 25, 0);
+    font-weight: 700;
+    transition-duration: 0.5s;
+  }
 }
 .graveyard {
   position: absolute;

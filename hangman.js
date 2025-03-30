@@ -26,14 +26,11 @@ let myGame;
 const canvas = get("#canvas");
 const ctx = canvas.getContext("2d");
 function start(mode) {
-  alert("startmode");
   get("#guess").disabled = false;
   get(".opening-text").classList.add("d-none");
   get(".opening-card").classList.add("open-card-anim");
-  alert(get(".opening-card").classList);
   setTimeout(
     () => {
-      alert("here!");
       get(".opening-card").classList.add("open-card-anim-done");
       let height = (get(".opening-card").offsetHeight / 2) * 2.5;
       document.getElementsByTagName("STYLE")[0].append(`
@@ -230,9 +227,10 @@ class Game {
       );
       this.stop(lLeg.points.length * 15);
       lLeg.draw(15, 2, "rgb(0,0,0)");
-      this.end(2);
+      setTimeout(() => {
+        this.end(2);
+      }, lLeg.points.length * 15 + 20);
     }
-    //3 more stages
   }
   init() {
     let container = get(".wordCont");
@@ -252,11 +250,12 @@ class Game {
     ctx.stroke();
     ctx.fillRect(63, height - 220, 14, 200);
     ctx.stroke();
-    ctx.fillRect(63, height - 234, 110, 14);
+    ctx.fillRect(63, height - 234, 109, 14);
     ctx.stroke();
     //string
     ctx.fillRect(168, height - 220, 4, 20);
     ctx.stroke();
+    this.drawLetters();
   }
   guess(arg) {
     if (this.word.includes(arg)) {
@@ -295,6 +294,7 @@ class Game {
         this
       );
     }
+    this.drawLetters();
   }
   stop(arg) {
     get("#guess").classList.add("off");
@@ -344,6 +344,42 @@ class Game {
       arg
     );
   }
+  drawLetters() {
+    ctx.clearRect(250, 0, canvas.offsetWidth - 250, canvas.offsetHeight);
+    let remainingWidth = canvas.offsetWidth - 300;
+    let columns = Math.floor(remainingWidth / 30);
+    let rows = Math.ceil(this.not.length / columns);
+    let textArr = new Array(rows);
+    let temp = [];
+    temp.push(...this.not);
+    for (let i = 0; i < rows; i++) {
+      textArr[i] = new Array(columns);
+    }
+    for (let i = 0; i < rows; i++) {
+      for (let q = 0; q < columns; q++) {
+        if (temp[0]) {
+          textArr[i][q] = temp[0];
+          temp.shift();
+        }
+      }
+    }
+    ctx.font = "20px black";
+    ctx.textBaseline = "middle";
+    ctx.textAlign = "middle";
+    ctx.fillText("- Incorrect Letters -", 250, canvas.offsetHeight - 150);
+    for (let i = 0; i < textArr.length; i++) {
+      for (let q = 0; q < textArr[i].length; q++) {
+        if (textArr[i][q]) {
+          ctx.fillText(
+            textArr[i][q].toUpperCase(),
+            250 + q * 35,
+            canvas.offsetHeight - 115 + i * 30
+          );
+        }
+      }
+    }
+    console.log(textArr, this.not);
+  }
 }
 function get(arg) {
   return document.querySelector(arg);
@@ -377,18 +413,17 @@ get("#submitButton").addEventListener("onclick", () => {
   }
 });
 function reset() {
-  alert("here!");
-  //again!
   myGame = null;
   ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
-  alert("here!");
   get(".winText").classList.add("fade-out");
-  get(".opening-text").classList.remove("d-none");
-  get(".graveyard").classList.remove("d-none");
-  get(".opening-text").classList.add("fade-in");
   setTimeout(() => {
     get(".winText").classList.remove("fade-out");
     get(".winText").classList.add("d-none");
-    get(".opening-text").classList.remove("fade-in");
+    get(".opening-text").classList.remove("d-none");
+    get(".graveyard").classList.remove("d-none");
+    get(".opening-text").classList.add("fade-in");
+    setTimeout(() => {
+      get(".opening-text").classList.remove("fade-in");
+    }, 500);
   }, 500);
 }
