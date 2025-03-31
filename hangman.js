@@ -479,6 +479,8 @@ function graveyard() {
     get(".opening-text").classList.remove("fade-out");
     get("#cW").innerHTML = "";
     get("#iW").innerHTML = "";
+    get(".correct").textContent = `Correct: ${goodWords.length}`;
+    get(".incorrect").textContent = `Incorrect: ${deadWords.length}`;
     for (let i = 0; i < deadWords.length; i++) {
       let item = document.createElement("li");
       item.textContent = deadWords[i];
