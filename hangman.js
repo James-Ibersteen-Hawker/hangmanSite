@@ -103,6 +103,10 @@ function modeButtons() {
   get(".backArrow").classList.add("fade-in");
   let length = Array.from(document.querySelectorAll(".button-row .m-1"));
   length = length[3];
+  if (goodWords.length > 0 || deadWords.length > 0) {
+    get(".graveyard").classList.remove("d-none");
+    get(".graveyard").classList.add("fade-in");
+  }
   document.querySelectorAll(".button-row .m-1").forEach((elem) => {
     elem.setAttribute("style", `width: ${length.offsetWidth}px`);
   });
@@ -111,6 +115,7 @@ function modeButtons() {
     get(".button-start").classList.remove("fade-out");
     btnRow.classList.add("d-block");
     btnRow.classList.remove("fade-in");
+    get(".graveyard").classList.remove("fade-in");
     get(".backArrow").classList.remove("fade-in");
   }, 500);
 }
@@ -421,7 +426,6 @@ class Game {
         }
       }
     }
-    console.log(textArr, this.not);
   }
 }
 function get(arg) {
@@ -513,7 +517,10 @@ function back() {
 function backPlay() {
   get(".button-row").classList.add("fade-out");
   get(".backArrow").classList.add("fade-out");
+  get(".graveyard").classList.add("fade-out");
   setTimeout(() => {
+    get(".graveyard").classList.add("d-none");
+    get(".graveyard").classList.remove("fade-out");
     get(".button-row").classList.add("d-none");
     get(".button-row").classList.remove("fade-out");
     get(".backArrow").classList.add("d-none");

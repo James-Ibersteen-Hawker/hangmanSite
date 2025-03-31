@@ -553,18 +553,30 @@ input:focus {
   color: maroon;
 }
 .graveText {
-  height: 100%;
-  width: 100%;
+  height: calc(100% - 6px);
+  width: calc(100% + 20px);
+  position: relative;
+  left: -10px;
   padding-top: 5px;
   overflow-y: auto;
   overflow-x: clip;
   color: black;
+  background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.85),
+      rgba(255, 255, 255, 0.85)
+    ),
+    url(graveyard.jpg);
+  background-position: center bottom;
+  border-radius: 12px;
   h2 {
     font-family: "Fleur de Leah", serif;
     font-style: italic;
     font-size: 40px;
     font-weight: 800;
     color: var(--brown);
+    position: relative;
+    z-index: 1;
   }
   ul {
     list-style-type: none;
@@ -573,6 +585,8 @@ input:focus {
     font-family: "Montserrat", sans-serif;
     width: 100%;
     padding-bottom: 30px;
+    position: relative;
+    z-index: 1;
     li {
       width: 100%;
       word-break: break-all;
@@ -588,6 +602,7 @@ input:focus {
   position: absolute;
   bottom: 5px;
   left: 5px;
+  z-index: 2;
   svg {
     width: 100%;
     height: 100%;
@@ -620,9 +635,8 @@ input:focus {
 }
 .footer {
   position: absolute;
-  bottom: 3px;
-  width: calc(100% - 6px);
-  left: 3px;
+  bottom: 0;
+  width: calc(100%);
   height: 60px;
   border-bottom-left-radius: 10px !important;
   border-bottom-right-radius: 10px !important;
@@ -630,6 +644,7 @@ input:focus {
   justify-content: center;
   align-items: center;
   font-family: "Montserrat", sans-serif;
+  z-index: 1;
 }
 .footer::before {
   content: "";
@@ -639,7 +654,12 @@ input:focus {
   left: 0;
   bottom: 0;
   background: white;
-  mask-image: linear-gradient(to bottom, transparent, white, white);
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 255, 255, 0.445),
+    white
+  );
   border-bottom-left-radius: 10px !important;
   border-bottom-right-radius: 10px !important;
   z-index: -1;
