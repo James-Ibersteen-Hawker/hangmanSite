@@ -99,6 +99,8 @@ function modeButtons() {
   let btnRow = get(".button-row");
   btnRow.classList.remove("d-none");
   btnRow.classList.add("fade-in");
+  get(".backArrow").classList.remove("d-none");
+  get(".backArrow").classList.add("fade-in");
   let length = Array.from(document.querySelectorAll(".button-row .m-1"));
   length = length[3];
   document.querySelectorAll(".button-row .m-1").forEach((elem) => {
@@ -109,6 +111,7 @@ function modeButtons() {
     get(".button-start").classList.remove("fade-out");
     btnRow.classList.add("d-block");
     btnRow.classList.remove("fade-in");
+    get(".backArrow").classList.remove("fade-in");
   }, 500);
 }
 class Game {
@@ -502,6 +505,21 @@ function back() {
     get(".opening-text").classList.add("fade-in");
     setTimeout(() => {
       get(".opening-text").classList.remove("fade-in");
+    }, 500);
+  }, 500);
+}
+function backPlay() {
+  get(".button-row").classList.add("fade-out");
+  get(".backArrow").classList.add("fade-out");
+  setTimeout(() => {
+    get(".button-row").classList.add("d-none");
+    get(".button-row").classList.remove("fade-out");
+    get(".backArrow").classList.add("d-none");
+    get(".backArrow").classList.remove("fade-out");
+    get(".button-start").classList.remove("d-none");
+    get(".button-start").classList.add("fade-in");
+    setTimeout(() => {
+      get(".button-start").classList.remove("fade-in");
     }, 500);
   }, 500);
 }
