@@ -585,6 +585,8 @@ input:focus {
     font-family: "Montserrat", sans-serif;
     width: 100%;
     padding-bottom: 30px;
+    padding-left: px;
+    padding-right: 5px;
     position: relative;
     z-index: 1;
     li {

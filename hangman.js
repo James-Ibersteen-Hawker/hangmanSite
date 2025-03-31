@@ -1,12 +1,38 @@
 "use strict";
 // import bezier from "./bezier.js";
 const words = [
+  "apt",
+  "spry",
+  "water",
+  "rhythm",
+  "ivy",
+  "cannon",
+  "ceramics",
+  "waterfall",
+  "dictionary",
+  "extinguisher",
+  "canopy",
+  "shipyard",
+  "chandelier",
+  "worcestershire",
+  "lancastershire",
+  "cavalry",
+  "byte",
+  "scurryfunge",
+  "typewriter",
+  "xylophone",
+  "phlegm",
+  "algorithm",
+  "artichoke",
+  "cabbage",
+  "bonk",
+  "wurst",
   "dyke",
   "abyss",
   "swamp",
   "moss",
-  "pub", //five or lower
-  "whiskey",
+  "jug", //five or lower
+  "liquid",
   "quirky",
   "lettuce",
   "quantum",
@@ -15,7 +41,8 @@ const words = [
   "sabotage",
   "jackhammer",
   "leprechaun",
-  "tablecloth", //10 or lower
+  "tablecloth", //15 or lower
+  "bibbitybobbityboo",
   "taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu",
   "llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch",
   "chargoggaggoggmanchauggaggoggcharbunugungamaugg",
@@ -61,8 +88,8 @@ function start(mode) {
         let selection = words.filter((val) => {
           if (mode == 1) return val.length <= 5;
           if (mode == 2) return val.length > 5 && val.length <= 7;
-          if (mode == 3) return val.length > 7 && val.length <= 10;
-          if (mode == 4) return val.length > 10;
+          if (mode == 3) return val.length > 7 && val.length <= 15;
+          if (mode == 4) return val.length > 15;
         });
         switch (mode) {
           case 1:
@@ -247,7 +274,9 @@ class Game {
               if (
                 this.slots.join("").includes("tau") ||
                 this.slots.join("").includes("llan") ||
-                this.slots.join("").includes("char")
+                this.slots.join("").includes("char") ||
+                this.slots.join("").includes("wor") ||
+                this.slots.join("").includes("lan")
               ) {
                 get(".wordCont").textContent =
                   this.slots[0].toUpperCase() +
