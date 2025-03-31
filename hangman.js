@@ -23,6 +23,7 @@ const words = [
   "hippopotomonstrosesquipedaliaphobia", //everything else
 ];
 let deadWords = [];
+let goodWords = [];
 let myGame;
 const canvas = get("#canvas");
 const ctx = canvas.getContext("2d");
@@ -306,6 +307,7 @@ class Game {
     if (this.slots.join("") == this.word.join("")) {
       get(".wordCont").classList.add("fade-out");
       get("#guess").disabled = true;
+      goodWords.push(this.word.join(""));
       setTimeout(
         () => {
           get(".wordCont").textContent = this.slots.join("");
@@ -436,7 +438,7 @@ window.addEventListener("keydown", (event) => {
     get("#guess").value = "";
   }
 });
-get("#submitButton").addEventListener("onclick", () => {
+function submit() {
   if (get("#guess").value != "") {
     if (get("#guess").value.split("").length > 1) return;
     if (myGame.not.includes(get("#guess").value.toLowerCase())) return;
@@ -449,7 +451,7 @@ get("#submitButton").addEventListener("onclick", () => {
     myGame.guess(get("#guess").value.toLowerCase());
     get("#guess").value = "";
   }
-});
+}
 function reset() {
   myGame = null;
   ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
@@ -472,10 +474,34 @@ function graveyard() {
   setTimeout(() => {
     get(".opening-text").classList.add("d-none");
     get(".opening-text").classList.remove("fade-out");
+    get("#cW").innerHTML = "";
+    get("#iW").innerHTML = "";
+    for (let i = 0; i < deadWords.length; i++) {
+      let item = document.createElement("li");
+      item.textContent = deadWords[i];
+      get("#iW").append(item);
+    }
+    for (let i = 0; i < goodWords.length; i++) {
+      let item = document.createElement("li");
+      item.textContent = goodWords[i];
+      get("#cW").append(item);
+    }
     get(".graveText").classList.add("fade-in");
     get(".graveText").classList.remove("d-none");
     setTimeout(() => {
       get(".graveText").classList.remove("fade-in");
+    }, 500);
+  }, 500);
+}
+function back() {
+  get(".graveText").classList.add("fade-out");
+  setTimeout(() => {
+    get(".graveText").classList.add("d-none");
+    get(".graveText").classList.remove("fade-out");
+    get(".opening-text").classList.remove("d-none");
+    get(".opening-text").classList.add("fade-in");
+    setTimeout(() => {
+      get(".opening-text").classList.remove("fade-in");
     }, 500);
   }, 500);
 }
