@@ -56,7 +56,11 @@ const canvas = get("#canvas");
 const ctx = canvas.getContext("2d");
 function start(mode) {
   get("#guess").disabled = false;
-  get(".opening-text").classList.add("d-none");
+  get(".opening-text").classList.add("fade-out");
+  setTimeout(() => {
+    get(".opening-text").classList.add("d-none");
+    get(".opening-text").classList.remove("fade-out");
+  }, 500);
   get(".opening-card").classList.add("open-card-anim");
   setTimeout(
     () => {
@@ -470,6 +474,7 @@ window.addEventListener("keydown", (event) => {
   if (event.key == "Enter" && get("#guess").value != "") {
     if (get("#guess").value.split("").length > 1) return;
     if (myGame.not.includes(get("#guess").value.toLowerCase())) return;
+    if (!myGame.letters.includes(get("#guess").value)) return;
     if (
       get(".wordCont")
         .textContent.split(" ")
@@ -484,6 +489,7 @@ function submit() {
   if (get("#guess").value != "") {
     if (get("#guess").value.split("").length > 1) return;
     if (myGame.not.includes(get("#guess").value.toLowerCase())) return;
+    if (!myGame.letters.includes(get("#guess").value)) return;
     if (
       get(".wordCont")
         .textContent.split(" ")
