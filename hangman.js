@@ -567,6 +567,6 @@ function sound(url) {
   let audio = new Audio(url);
   audio.play();
 }
-window.addEventListener("onclick", () => {
+window.addEventListener("click", () => {
   sound("button.wav");
 });

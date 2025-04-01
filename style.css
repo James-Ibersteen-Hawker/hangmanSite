@@ -558,8 +558,6 @@ input:focus {
   position: relative;
   left: -10px;
   padding-top: 5px;
-  overflow-y: auto;
-  overflow-x: clip;
   color: black;
   background: linear-gradient(
       to bottom,
@@ -585,8 +583,8 @@ input:focus {
     font-family: "Montserrat", sans-serif;
     width: 100%;
     padding-bottom: 30px;
-    padding-left: px;
-    padding-right: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
     position: relative;
     z-index: 1;
     li {
@@ -595,6 +593,11 @@ input:focus {
       hyphens: auto;
       margin-bottom: 3px;
     }
+  }
+  .row {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: clip;
   }
 }
 #backButton {
@@ -647,6 +650,10 @@ input:focus {
   align-items: center;
   font-family: "Montserrat", sans-serif;
   z-index: 1;
+  .score {
+    display: flex;
+    align-items: center;
+  }
 }
 .footer::before {
   content: "";
@@ -659,7 +666,7 @@ input:focus {
   mask-image: linear-gradient(
     to bottom,
     transparent,
-    rgba(255, 255, 255, 0.445),
+    rgba(255, 255, 255, 0.5),
     white
   );
   border-bottom-left-radius: 10px !important;
