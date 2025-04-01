@@ -337,9 +337,11 @@ class Game {
         }
       }
       get(".wordCont").textContent = this.slots.join(" ");
+      sound("correct.mp3");
     } else {
       this.not.push(arg);
       this.stageIncr();
+      sound("wrong.wav");
     }
     if (this.slots.join("") == this.word.join("")) {
       get(".wordCont").classList.add("fade-out");
@@ -561,3 +563,10 @@ function backPlay() {
     }, 500);
   }, 500);
 }
+function sound(url) {
+  let audio = new Audio(url);
+  audio.play();
+}
+window.addEventListener("onclick", () => {
+  sound("button.wav");
+});
