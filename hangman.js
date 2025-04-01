@@ -1,5 +1,4 @@
 "use strict";
-// import bezier from "./bezier.js";
 const words = [
   "apt",
   "spry",
@@ -49,6 +48,7 @@ const words = [
   "pneumonoultramicroscopicsilicovolcanoconiosis",
   "hippopotomonstrosesquipedaliaphobia", //everything else
 ];
+//for score
 let deadWords = [];
 let goodWords = [];
 let myGame;
@@ -146,6 +146,7 @@ function modeButtons() {
     get(".backArrow").classList.remove("fade-in");
   }, 500);
 }
+//the Game object
 class Game {
   word;
   mode;
@@ -185,6 +186,7 @@ class Game {
     this.not = [];
     this.stage = stage;
   }
+  //draw more stages
   stageIncr() {
     let cS = this.stage;
     cS++;
@@ -304,6 +306,7 @@ class Game {
       );
     }
   }
+  //initialize, gallows() makes the initial drawing
   init() {
     let container = get(".wordCont");
     this.slots = new Array(this.word.length);
@@ -423,6 +426,7 @@ class Game {
       arg
     );
   }
+  //draws the letters to the canvas
   drawLetters() {
     ctx.clearRect(250, 0, canvas.offsetWidth - 250, canvas.offsetHeight);
     let remainingWidth = canvas.offsetWidth - 300;
@@ -507,6 +511,7 @@ function reset() {
     }, 500);
   }, 500);
 }
+//compiles the graveyard when the button is pressed
 function graveyard() {
   get(".opening-text").classList.add("fade-out");
   setTimeout(() => {
