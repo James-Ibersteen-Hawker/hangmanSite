@@ -35,6 +35,11 @@ body {
   padding: 0;
   margin: 0;
   user-select: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+*::-webkit-scrollbar {
+  display: none;
 }
 *[onclick$="()"] {
   cursor: pointer;
@@ -609,6 +614,11 @@ input:focus {
     height: 100%;
     overflow-y: auto;
     overflow-x: clip;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .row::-webkit-scrollbar {
+    display: none;
   }
 }
 #backButton {
