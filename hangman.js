@@ -13,8 +13,8 @@ const words = [
   "canopy",
   "shipyard",
   "chandelier",
-  "worcestershire",
-  "lancastershire",
+  "Worcestershire",
+  "Lancastershire",
   "cavalry",
   "byte",
   "scurryfunge",
@@ -42,9 +42,9 @@ const words = [
   "leprechaun",
   "tablecloth", //15 or lower
   "bibbitybobbityboo",
-  "taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu",
-  "llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch",
-  "chargoggaggoggmanchauggaggoggcharbunugungamaugg",
+  "Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu",
+  "Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch",
+  "Chargoggaggoggmanchauggaggoggcharbunugungamaugg",
   "pneumonoultramicroscopicsilicovolcanoconiosis",
   "hippopotomonstrosesquipedaliaphobia", //everything else
 ];
@@ -52,6 +52,34 @@ const words = [
 let deadWords = [];
 let goodWords = [];
 let myGame;
+let alphabet = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
+];
 const canvas = get("#canvas");
 const ctx = canvas.getContext("2d");
 function start(mode) {
@@ -398,9 +426,14 @@ class Game {
     this.drawLetters();
   }
   guess(arg) {
-    if (this.word.includes(arg)) {
+    if (
+      this.word.includes(arg.toLowerCase())
+    ) {
       for (let i = 0; i < this.word.length; i++) {
-        if (this.word[i] == arg) {
+        if (
+          this.word[i] == arg.toLowerCase() ||
+          this.word[i] == arg.toUpperCase()
+        ) {
           this.slots[i] = arg;
         }
       }
@@ -411,22 +444,13 @@ class Game {
       this.stageIncr();
       sound("wrong.wav");
     }
-    if (this.slots.join("") == this.word.join("")) {
+    if (this.slots.join("").toLowerCase() == this.word.join("").toLowerCase()) {
       get(".wordCont").classList.add("fade-out");
       get("#guess").disabled = true;
       goodWords.push(this.word.join(""));
       setTimeout(
         () => {
           get(".wordCont").textContent = this.slots.join("");
-          if (
-            this.slots.join("").includes("tau") ||
-            this.slots.join("").includes("llan") ||
-            this.slots.join("").includes("char")
-          ) {
-            get(".wordCont").textContent =
-              this.slots[0].toUpperCase() +
-              this.slots.slice(1, this.slots.length).join("");
-          }
           get(".wordCont").classList.remove("fade-out");
           get(".wordCont").classList.add("rightWord");
           get(".wordCont").classList.add("fade-in");
@@ -548,8 +572,17 @@ window.addEventListener("keydown", (event) => {
 });
 window.addEventListener("keydown", (event) => {
   if (event.key == "Enter" && get("#customInput").value != "") {
-    get("#customInput").value = get("#customInput").value.split(" ").join("");
-    customGame();
+    let value = get("#customInput").value.split("");
+    let output = [];
+    for (let i = 0; i < value.length; i++) {
+      if (alphabet.includes(value[i])) {
+        output.push(value[i]);
+      }
+    }
+    value = output.join("");
+    get("#customInput").value = value.toLowerCase();
+    if (value.length == 0) return;
+    else customGame();
   }
 });
 function submit() {
@@ -666,10 +699,3 @@ function backToMain() {
     }, 500);
   }, 500);
 }
-get("#customInput").addEventListener("keyup", (event) => {
-  if (event.key == " ") {
-    let value = get("#customInput").value.split("");
-    value.pop();
-    get("#customInput").value = value.join("");
-  }
-});
