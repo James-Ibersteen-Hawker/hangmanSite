@@ -79,6 +79,32 @@ let alphabet = [
   "x",
   "y",
   "z",
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "J",
+  "I",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
 ];
 const canvas = get("#canvas");
 const ctx = canvas.getContext("2d");
@@ -218,7 +244,7 @@ function customGame() {
         get("#canvas").height = get("canvas").offsetHeight;
         get(".difficulty").textContent = "Custom Mode";
         get(".difficulty").id = "custom";
-        myGame = new Game(get("#customInput").value.toLowerCase(), "Custom", 0);
+        myGame = new Game(get("#customInput").value, "Custom", 0);
         myGame.init();
         get("#customInput").value = "";
       }, 500);
@@ -426,21 +452,26 @@ class Game {
     this.drawLetters();
   }
   guess(arg) {
+    console.log(this.word);
+    console.log(arg);
     if (
-      this.word.includes(arg.toLowerCase())
+      this.word.includes(arg.toLowerCase()) ||
+      this.word.includes(arg.toUpperCase())
     ) {
       for (let i = 0; i < this.word.length; i++) {
         if (
           this.word[i] == arg.toLowerCase() ||
           this.word[i] == arg.toUpperCase()
         ) {
-          this.slots[i] = arg;
+          if (this.word[i] == arg.toUpperCase())
+            this.slots[i] = arg.toUpperCase();
+          else this.slots[i] = arg;
         }
       }
       get(".wordCont").textContent = this.slots.join(" ");
       sound("correct.mp3");
     } else {
-      this.not.push(arg);
+      this.not.push(arg.toLowerCase());
       this.stageIncr();
       sound("wrong.wav");
     }
@@ -559,7 +590,7 @@ window.addEventListener("keydown", (event) => {
   if (event.key == "Enter" && get("#guess").value != "") {
     if (get("#guess").value.split("").length > 1) return;
     if (myGame.not.includes(get("#guess").value.toLowerCase())) return;
-    if (!myGame.letters.includes(get("#guess").value)) return;
+    if (!alphabet.includes(get("#guess").value)) return;
     if (
       get(".wordCont")
         .textContent.split(" ")
@@ -572,17 +603,7 @@ window.addEventListener("keydown", (event) => {
 });
 window.addEventListener("keydown", (event) => {
   if (event.key == "Enter" && get("#customInput").value != "") {
-    let value = get("#customInput").value.split("");
-    let output = [];
-    for (let i = 0; i < value.length; i++) {
-      if (alphabet.includes(value[i])) {
-        output.push(value[i]);
-      }
-    }
-    value = output.join("");
-    get("#customInput").value = value.toLowerCase();
-    if (value.length == 0) return;
-    else customGame();
+    vet();
   }
 });
 function submit() {
@@ -698,4 +719,17 @@ function backToMain() {
       get(".opening-text").classList.remove("fade-in");
     }, 500);
   }, 500);
+}
+function vet() {
+  let value = get("#customInput").value.split("");
+  let output = [];
+  for (let i = 0; i < value.length; i++) {
+    if (alphabet.includes(value[i])) {
+      output.push(value[i]);
+    }
+  }
+  value = output.join("");
+  get("#customInput").value = value;
+  if (value.length == 0) return;
+  else customGame();
 }
