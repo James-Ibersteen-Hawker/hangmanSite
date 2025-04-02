@@ -789,3 +789,60 @@ input:focus {
     transition-duration: 0.5s;
   }
 }
+.giveUpBtn {
+  width: 50%;
+  height: 40px;
+  display: block;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 0;
+  display: flex;
+  margin-top: 0px;
+  justify-content: center;
+  align-items: center;
+  background: var(--white);
+  border-radius: 10px;
+  cursor: pointer;
+  border: 4px outset rgb(122, 0, 0);
+  color: black;
+  font-family: "Montserrat", sans-serif;
+  position: relative;
+  overflow: clip;
+  transition: 0.5s;
+  p {
+    padding: 0;
+    margin: 0;
+    font-size: 18px;
+  }
+}
+.stumpedSlash {
+  height: 100%;
+  width: 80%;
+  left: -110%;
+  background: rgba(155, 3, 3, 0.699);
+  position: absolute;
+  z-index: 0;
+  transform: skew(-30deg);
+  transition: 1s;
+  z-index: 0;
+}
+.giveUpBtn:hover {
+  background: rgb(216, 216, 216);
+  .stumpedSlash {
+    left: 110%;
+  }
+  p {
+    font-family: "Fleur De Leah", cursive;
+    color: var(--brown);
+    font-weight: 700;
+    transition-duration: 0.5s;
+  }
+}
+hr {
+  height: 2px;
+  transform: skew(-30deg);
+  border: 0;
+  width: 80%;
+  background: var(--brown);
+  opacity: 0.5;
+}

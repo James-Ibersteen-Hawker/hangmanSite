@@ -452,8 +452,6 @@ class Game {
     this.drawLetters();
   }
   guess(arg) {
-    console.log(this.word);
-    console.log(arg);
     if (
       this.word.includes(arg.toLowerCase()) ||
       this.word.includes(arg.toUpperCase())
@@ -732,4 +730,25 @@ function vet() {
   get("#customInput").value = value;
   if (value.length == 0) return;
   else customGame();
+}
+function giveUp() {
+  get(".wordCont").classList.add("fade-out");
+  get("#guess").disabled = true;
+  deadWords.push(myGame.word.join(""));
+  setTimeout(
+    () => {
+      get(".wordCont").textContent = myGame.word.join("");
+      get(".wordCont").classList.remove("fade-out");
+      get(".wordCont").classList.add("wrongWord");
+      get(".wordCont").classList.add("fade-in");
+      setTimeout(() => {
+        get(".wordCont").classList.remove("fade-in");
+      }, 500);
+      setTimeout(() => {
+        myGame.end(1);
+      }, 1500);
+    },
+    500,
+    myGame
+  );
 }
