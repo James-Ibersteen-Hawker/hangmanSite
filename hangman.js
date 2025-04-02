@@ -622,6 +622,7 @@ function back() {
     }, 500);
   }, 500);
 }
+//back to main play button
 function backPlay() {
   get(".button-row").classList.add("fade-out");
   get(".backArrow").classList.add("fade-out");
@@ -647,9 +648,11 @@ function sound(url) {
   let audio = new Audio(url);
   audio.play();
 }
+//base click sound
 window.addEventListener("click", () => {
   sound("button.wav");
 });
+//back to main buttons
 function backToMain() {
   get(".customText").classList.add("fade-out");
   setTimeout(() => {
@@ -662,3 +665,8 @@ function backToMain() {
     }, 500);
   }, 500);
 }
+get("#customInput").addEventListener("keydown", (event) => {
+  if (event.key == " ") {
+    //reset text to before space
+  }
+});
