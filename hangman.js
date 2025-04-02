@@ -132,6 +132,8 @@ function modeButtons() {
   btnRow.classList.add("fade-in");
   get(".backArrow").classList.remove("d-none");
   get(".backArrow").classList.add("fade-in");
+  get(".customWord").classList.remove("d-none");
+  get(".customWord").classList.add("fade-in");
   let length = Array.from(document.querySelectorAll(".button-row .m-1"));
   length = length[3];
   if (goodWords.length > 0 || deadWords.length > 0) {
@@ -148,6 +150,65 @@ function modeButtons() {
     btnRow.classList.remove("fade-in");
     get(".graveyard").classList.remove("fade-in");
     get(".backArrow").classList.remove("fade-in");
+    get(".customWord").classList.remove("fade-in");
+  }, 500);
+}
+function customGame() {
+  get("#guess").disabled = false;
+  get(".customText").classList.add("fade-out");
+  setTimeout(() => {
+    get(".customText").classList.add("d-none");
+    get(".customText").classList.remove("fade-out");
+  }, 500);
+  get(".opening-card").classList.add("open-card-anim");
+  setTimeout(
+    () => {
+      get(".opening-card").classList.add("open-card-anim-done");
+      let height = (get(".opening-card").offsetHeight / 2) * 2.5;
+      document.getElementsByTagName("STYLE")[0].append(`
+        .openedCard::after, .openedCard::before {
+        position: absolute;
+        left: 50%;
+        transform: scaleX(1) scaleY(1) translateX(-50%);
+        animation: none;
+        width: ${get(".opening-card").offsetWidth * 1.6}px;
+        height: ${height}px;
+        }  
+        .opening-card {
+        max-height: none !important;
+        width: ${get(".opening-card").offsetWidth * 1.6}px;
+        height: ${get(".opening-card").offsetHeight * 2.5}px !important;
+        }
+      `);
+      get(".opening-card").classList.add("openedCard");
+      get(".opening-card").classList.remove("open-card-anim");
+      get(".gameText").classList.remove("d-none");
+      get(".gameText").classList.add("fade-in");
+      setTimeout(() => {
+        get(".gameText").classList.remove("fade-in");
+        get("#canvas").width = get("canvas").offsetWidth;
+        get("#canvas").height = get("canvas").offsetHeight;
+        get(".difficulty").textContent = "Custom Mode";
+        get(".difficulty").id = "custom";
+        myGame = new Game(get("#customInput").value.toLowerCase(), "Custom", 0);
+        myGame.init();
+        get("#customInput").value = "";
+      }, 500);
+    },
+    4000,
+    document
+  );
+}
+function customText() {
+  get(".opening-text").classList.add("fade-out");
+  setTimeout(() => {
+    get(".opening-text").classList.add("d-none");
+    get(".opening-text").classList.remove("fade-out");
+    get(".customText").classList.remove("d-none");
+    get(".customText").classList.add("fade-in");
+    setTimeout(() => {
+      get(".customText").classList.remove("fade-in");
+    }, 500);
   }, 500);
 }
 //the Game object
@@ -485,6 +546,11 @@ window.addEventListener("keydown", (event) => {
     get("#guess").value = "";
   }
 });
+window.addEventListener("keydown", (event) => {
+  if (event.key == "Enter" && get("#customInput").value != "") {
+    customGame();
+  }
+});
 function submit() {
   if (get("#guess").value != "") {
     if (get("#guess").value.split("").length > 1) return;
@@ -560,6 +626,7 @@ function backPlay() {
   get(".button-row").classList.add("fade-out");
   get(".backArrow").classList.add("fade-out");
   get(".graveyard").classList.add("fade-out");
+  get(".customWord").classList.add("fade-out");
   setTimeout(() => {
     get(".graveyard").classList.add("d-none");
     get(".graveyard").classList.remove("fade-out");
@@ -569,6 +636,8 @@ function backPlay() {
     get(".backArrow").classList.remove("fade-out");
     get(".button-start").classList.remove("d-none");
     get(".button-start").classList.add("fade-in");
+    get(".customWord").classList.remove("fade-out");
+    get(".customWord").classList.add("d-none");
     setTimeout(() => {
       get(".button-start").classList.remove("fade-in");
     }, 500);
@@ -581,3 +650,15 @@ function sound(url) {
 window.addEventListener("click", () => {
   sound("button.wav");
 });
+function backToMain() {
+  get(".customText").classList.add("fade-out");
+  setTimeout(() => {
+    get(".customText").classList.add("d-none");
+    get(".customText").classList.remove("fade-out");
+    get(".opening-text").classList.remove("d-none");
+    get(".opening-text").classList.add("fade-in");
+    setTimeout(() => {
+      get(".opening-text").classList.remove("fade-in");
+    }, 500);
+  }, 500);
+}
