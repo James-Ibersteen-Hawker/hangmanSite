@@ -548,6 +548,7 @@ window.addEventListener("keydown", (event) => {
 });
 window.addEventListener("keydown", (event) => {
   if (event.key == "Enter" && get("#customInput").value != "") {
+    get("#customInput").value = get("#customInput").value.split(" ").join("");
     customGame();
   }
 });
@@ -665,8 +666,10 @@ function backToMain() {
     }, 500);
   }, 500);
 }
-get("#customInput").addEventListener("keydown", (event) => {
+get("#customInput").addEventListener("keyup", (event) => {
   if (event.key == " ") {
-    //reset text to before space
+    let value = get("#customInput").value.split("");
+    value.pop();
+    get("#customInput").value = value.join("");
   }
 });
