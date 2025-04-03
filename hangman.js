@@ -745,7 +745,7 @@ function giveUp() {
         get(".wordCont").classList.remove("fade-in");
       }, 500);
       setTimeout(() => {
-        myGame.end(1);
+        myGame.end(2);
       }, 1500);
     },
     500,
