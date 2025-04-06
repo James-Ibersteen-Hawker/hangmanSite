@@ -8,6 +8,13 @@ const words = [
   "cannon",
   "ceramics",
   "waterfall",
+  "syringe",
+  "quagmire",
+  "jazz",
+  "stasis",
+  "glyph",
+  "myth",
+  "optics",
   "dictionary",
   "extinguisher",
   "canopy",
@@ -139,40 +146,40 @@ function start(mode) {
       get(".opening-card").classList.remove("open-card-anim");
       get(".gameText").classList.remove("d-none");
       get(".gameText").classList.add("fade-in");
+      get("#canvas").width = get("canvas").offsetWidth;
+      get("#canvas").height = get("canvas").offsetHeight;
+      let selection = words.filter((val) => {
+        if (mode == 1) return val.length <= 5;
+        if (mode == 2) return val.length > 5 && val.length <= 7;
+        if (mode == 3) return val.length > 7 && val.length <= 15;
+        if (mode == 4) return val.length > 15;
+      });
+      switch (mode) {
+        case 1:
+          get(".difficulty").textContent = "Easy Mode";
+          get(".difficulty").id = "easy";
+          break;
+        case 2:
+          get(".difficulty").textContent = "Medium Mode";
+          get(".difficulty").id = "medium";
+          break;
+        case 3:
+          get(".difficulty").textContent = "Hard Mode";
+          get(".difficulty").id = "hard";
+          break;
+        case 4:
+          get(".difficulty").textContent = "Ridiculous Mode";
+          get(".difficulty").id = "ridiculous";
+          break;
+      }
+      myGame = new Game(
+        selection[Math.floor(Math.random() * selection.length)],
+        0,
+        0
+      );
+      myGame.init();
       setTimeout(() => {
         get(".gameText").classList.remove("fade-in");
-        get("#canvas").width = get("canvas").offsetWidth;
-        get("#canvas").height = get("canvas").offsetHeight;
-        let selection = words.filter((val) => {
-          if (mode == 1) return val.length <= 5;
-          if (mode == 2) return val.length > 5 && val.length <= 7;
-          if (mode == 3) return val.length > 7 && val.length <= 15;
-          if (mode == 4) return val.length > 15;
-        });
-        switch (mode) {
-          case 1:
-            get(".difficulty").textContent = "Easy Mode";
-            get(".difficulty").id = "easy";
-            break;
-          case 2:
-            get(".difficulty").textContent = "Medium Mode";
-            get(".difficulty").id = "medium";
-            break;
-          case 3:
-            get(".difficulty").textContent = "Hard Mode";
-            get(".difficulty").id = "hard";
-            break;
-          case 4:
-            get(".difficulty").textContent = "Ridiculous Mode";
-            get(".difficulty").id = "ridiculous";
-            break;
-        }
-        myGame = new Game(
-          selection[Math.floor(Math.random() * selection.length)],
-          0,
-          0
-        );
-        myGame.init();
       }, 500);
     },
     4000,
@@ -238,15 +245,15 @@ function customGame() {
       get(".opening-card").classList.remove("open-card-anim");
       get(".gameText").classList.remove("d-none");
       get(".gameText").classList.add("fade-in");
+      get("#canvas").width = get("canvas").offsetWidth;
+      get("#canvas").height = get("canvas").offsetHeight;
+      myGame = new Game(get("#customInput").value, "Custom", 0);
+      myGame.init();
+      get("#customInput").value = "";
+      get(".difficulty").textContent = "Custom Mode";
+      get(".difficulty").id = "custom";
       setTimeout(() => {
         get(".gameText").classList.remove("fade-in");
-        get("#canvas").width = get("canvas").offsetWidth;
-        get("#canvas").height = get("canvas").offsetHeight;
-        get(".difficulty").textContent = "Custom Mode";
-        get(".difficulty").id = "custom";
-        myGame = new Game(get("#customInput").value, "Custom", 0);
-        myGame.init();
-        get("#customInput").value = "";
       }, 500);
     },
     4000,
@@ -428,16 +435,29 @@ class Game {
   //initialize, gallows() makes the initial drawing
   init() {
     let container = get(".wordCont");
+    container.textContent = "";
     this.slots = new Array(this.word.length);
     for (let i = 0; i < this.slots.length; i++) {
       this.slots[i] = "_";
+      if (this.word[i] == " ") {
+        this.slots[i] = " ";
+      }
     }
-    container.textContent = this.slots.join(" ");
+    if (this.slots.includes(" ")) {
+      let temp = this.slots.join("").split(" ");
+      for (let i = 0; i < temp.length; i++) {
+        container.insertAdjacentText(
+          "beforeend",
+          `${temp[i].split("").join(" ")}   `
+        );
+      }
+    } else {
+      container.textContent = this.slots.join(" ");
+    }
     this.gallows();
     get("#guess").focus();
   }
   gallows() {
-    let width = Number(canvas.offsetWidth);
     let height = Number(canvas.offsetHeight);
     ctx.fillStyle = "rgb(0,0,0)";
     ctx.fillRect(20, height - 20, 100, 20);
@@ -466,7 +486,18 @@ class Game {
           else this.slots[i] = arg;
         }
       }
-      get(".wordCont").textContent = this.slots.join(" ");
+      if (this.word.includes(" ")) {
+        let temp = this.slots.join("").split(" ");
+        get(".wordCont").textContent = "";
+        for (let i = 0; i < temp.length; i++) {
+          get(".wordCont").insertAdjacentText(
+            "beforeend",
+            `${temp[i].split("").join(" ")}   `
+          );
+        }
+      } else {
+        get(".wordCont").textContent = this.slots.join(" ");
+      }
       sound("correct.mp3");
     } else {
       this.not.push(arg.toLowerCase());
@@ -722,7 +753,7 @@ function vet() {
   let value = get("#customInput").value.split("");
   let output = [];
   for (let i = 0; i < value.length; i++) {
-    if (alphabet.includes(value[i])) {
+    if (alphabet.includes(value[i]) || value[i] == " ") {
       output.push(value[i]);
     }
   }
