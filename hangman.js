@@ -267,6 +267,7 @@ function customText() {
     get(".opening-text").classList.remove("fade-out");
     get(".customText").classList.remove("d-none");
     get(".customText").classList.add("fade-in");
+    get("#customInput").focus();
     setTimeout(() => {
       get(".customText").classList.remove("fade-in");
     }, 500);
