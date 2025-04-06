@@ -446,13 +446,13 @@ class Game {
     if (this.slots.includes(" ")) {
       let temp = this.slots.join("").split(" ");
       for (let i = 0; i < temp.length; i++) {
-        container.insertAdjacentText(
+        container.insertAdjacentHTML(
           "beforeend",
-          `${temp[i].split("").join(" ")}   `
+          `${temp[i].split("").join("&nbsp;")}&nbsp; &nbsp;`
         );
       }
     } else {
-      container.textContent = this.slots.join(" ");
+      container.innerHTML = this.slots.join("&nbsp;");
     }
     this.gallows();
     get("#guess").focus();
@@ -490,13 +490,13 @@ class Game {
         let temp = this.slots.join("").split(" ");
         get(".wordCont").textContent = "";
         for (let i = 0; i < temp.length; i++) {
-          get(".wordCont").insertAdjacentText(
+          get(".wordCont").insertAdjacentHTML(
             "beforeend",
-            `${temp[i].split("").join(" ")}   `
+            `${temp[i].split("").join("&nbsp;")}&nbsp; &nbsp;`
           );
         }
       } else {
-        get(".wordCont").textContent = this.slots.join(" ");
+        get(".wordCont").innerHTML = this.slots.join("&nbsp;");
       }
       sound("correct.mp3");
     } else {
@@ -679,12 +679,20 @@ function graveyard() {
     get(".incorrect").textContent = `Incorrect: ${deadWords.length}`;
     for (let i = 0; i < deadWords.length; i++) {
       let item = document.createElement("li");
-      item.textContent = deadWords[i];
+      if (deadWords[i].includes(" ")) {
+        item.innerHTML = deadWords[i];
+      } else {
+        item.innerHTML = deadWords[i].split("").join("&shy;");
+      }
       get("#iW").append(item);
     }
     for (let i = 0; i < goodWords.length; i++) {
       let item = document.createElement("li");
-      item.textContent = goodWords[i];
+      if (goodWords[i].includes(" ")) {
+        item.innerHTML = goodWords[i];
+      } else {
+        item.innerHTML = goodWords[i].split("").join("&shy;");
+      }
       get("#cW").append(item);
     }
     get(".graveText").classList.add("fade-in");

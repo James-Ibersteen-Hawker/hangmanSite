@@ -363,7 +363,7 @@ h1 {
   text-align: center;
   padding-left: 10px;
   padding-right: 10px;
-  word-break: break-all;
+  overflow-wrap: normal;
   white-space: pre-wrap;
   font-family: "Montserrat", sans-serif;
 }
@@ -596,8 +596,8 @@ input:focus {
     z-index: 1;
     li {
       width: 100%;
-      word-break: break-all;
-      hyphens: auto;
+      overflow-wrap: anywhere;
+      hyphens: manual;
       margin-bottom: 3px;
       position: relative;
     }
